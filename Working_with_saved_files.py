@@ -16,6 +16,14 @@ class MySyntaxError(SyntaxError):
     pass
 
 
+def no_space_string(s):
+    s1 = ''
+    for i in range(len(s)):
+        if s[i] != ' ':
+            s1 += s[i]
+    return s1
+
+
 def formatted_command(s):
     i = 0
     res = ''
@@ -23,9 +31,9 @@ def formatted_command(s):
         while s[i] != '(':
             res += s[i]
             i += 1
-        return res
+        return no_space_string(res)
     else:
-        return s
+        return no_space_string(s)
 
 
 def function_argument(s):
@@ -136,7 +144,6 @@ def core_alg(l):
         pass
 
 
-coords()
 compiling_txt('sample_file.txt')
 canvas.pack()
 main.mainloop()
