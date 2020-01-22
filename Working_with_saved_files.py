@@ -97,7 +97,11 @@ def compiling_txt(file_name):
             f = False
             raise MySyntaxError('Синтаксическая ошибка')
     if f:
+        op = l[0]
         core_alg(l)
+        if op == 'Черепаха' or op == 'Чертежник':
+            canvas.pack()
+            main.mainloop()
 
 
 def core_alg(l):
@@ -135,7 +139,6 @@ def core_alg(l):
             elif formatted_command(l[i]) == 'опусти_перо':
                 op.down()
 
-
     elif operator == 'Черепаха':
         pass
     elif operator == 'Вычислитель':
@@ -145,5 +148,3 @@ def core_alg(l):
 
 
 compiling_txt('sample_file.txt')
-canvas.pack()
-main.mainloop()
