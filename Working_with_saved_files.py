@@ -18,6 +18,20 @@ def formatted_command(s):
     return res
 
 
+def function_argument(s):
+    i = 0
+    while s[i] != '(':
+        i += 1
+
+    i += 1
+    i1 = i
+    while s[i] != ')':
+        i += 1
+    i2 = i
+    res = eval(s[i1:i2 + 1])
+    return res
+
+
 def compiling_txt(file_name):
     file = open(file_name, 'rt', encoding='utf-8')
     l = file.readlines()
