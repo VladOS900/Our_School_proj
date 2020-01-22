@@ -1,0 +1,2 @@
+class Blueprinter:
+    pass
