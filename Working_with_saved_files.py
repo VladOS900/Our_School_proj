@@ -74,25 +74,23 @@ def complicated_argument(s):
     return res
 
 
-def cycle_body(l):
-    f = False
-    p1, p2 = 0, 0
-    for i in range(len(l)):
-        if 'пока' in l[i] or 'нц' in l[i]:
-            p1 = i + 1
-            f = True
+def cycle_body(l, i1):
+    balance = 0
+    cycle_begin = 0
+    cycle_end = 0
+    l1 = []
+    for i in range(i1, len(l) + 1):
+        if balance == 0 and cycle_begin != cycle_end:
+            l1 = l[(cycle_begin + 1): cycle_end]
+            l1.insert(0, cycle_end + 1)
             break
-    for i in range(len(l) - 1, -1, -1):
+        if 'нц' in l[i]:
+            cycle_begin = i
+            balance += 1
         if 'кц' in l[i]:
-            p2 = i
-            break
-
-    if f:
-        res = l[p1:p2]
-        res.insert(0, p2 + 1)
-    else:
-        return [False]
-    return res
+            cycle_end = i
+            balance -= 1
+    return l1
 
 
 def norm(a):
@@ -234,6 +232,7 @@ def compiling_txt(file_name):
     output.close()
 
 
+# ________________________________________________________________________________
 def core_alg(l, op, canvas):
     global main, variables
     if isinstance(op, Blueprinter):
@@ -266,7 +265,7 @@ def core_alg(l, op, canvas):
             elif t == 'опусти_перо':
                 op.down()
             elif 'нц' in t:
-                cycle = cycle_body(l)
+                cycle = cycle_body(l, i)
                 for j in range(int(function_argument(l[i]))):
                     core_alg(cycle[1:], op, canvas)
                 i = int(cycle[0]) - 1
@@ -298,7 +297,8 @@ def core_alg(l, op, canvas):
             elif t == 'опусти_хвост':
                 op.down()
             elif 'нц' in t:
-                cycle = cycle_body(l)
+                cycle = cycle_body(l, i)
+                print(cycle)
                 for j in range(int(function_argument(l[i]))):
                     core_alg(cycle[1:], op, canvas)
                 i = int(cycle[0]) - 2
@@ -329,7 +329,7 @@ def core_alg(l, op, canvas):
                 t1 = expression(l1)
                 variables[l[i][:i1]] = t1
             elif 'нц' in t:
-                cycle = cycle_body(l)
+                cycle = cycle_body(l, i)
                 for j in range(expression(function_argument(l[i]))):
                     core_alg(cycle[1:], op, canvas)
                 i = int(cycle[0]) - 1
@@ -404,8 +404,9 @@ def core_alg(l, op, canvas):
                 image = image.transpose(Image.FLIP_TOP_BOTTOM)
 
             elif t == "уменьшить":
-                new_w = int(function_argument(l[i]))
+                w = int(function_argument(l[i]))
+                new_w = image.size[0] // w
                 image.thumbnail((new_w, new_w), Image.ANTIALIAS)
             i += 1
-        image.save(img_name)
+        image.save('new_' + img_name)
         i += 1
