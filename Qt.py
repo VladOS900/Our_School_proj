@@ -57,7 +57,7 @@ QListWidget::item:selected {
 """
 documentation = open('documentation', 'r', encoding='UTF-8').read()
 texts = []
-for i in range(0, 6):
+for i in range(0, 7):
     textik = open('text{}'.format(i), 'r', encoding='UTF-8').readlines()
     texts.append(''.join(textik))
 
@@ -376,6 +376,7 @@ class Ui_MainWindow(QWidget):
         item = self.listWidget.item(6)
         item.setText(_translate("MainWindow", "Документация: Картиночка"))
         self.listWidget.itemClicked.connect(self.openWindow)
+        item = self.listWidget.item(7)
         self.listWidget.setSortingEnabled(__sortingEnabled)
         self.menu.setTitle(_translate("MainWindow", "Файлы"))
         self.menu_2.setTitle(_translate("MainWindow", "Настройки"))
