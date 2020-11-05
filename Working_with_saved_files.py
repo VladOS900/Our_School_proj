@@ -184,7 +184,6 @@ def coords(canvas):
 
 # -------------------------------------------------------------------------------------------------------
 def compiling_txt(file_name):
-    os.chdir('D:\MainProj')
     global output
     flag = False
     output = open('output.txt', 'wt', encoding='utf-8')
@@ -208,10 +207,10 @@ def compiling_txt(file_name):
             else:
                 f = False
                 os.chdir('')
-                output.write('Синтаксическая ошибка в строке {}: {}'.format(i, t))
+                output.write('Синтаксическая ошибка в строке {}: {}\n'.format(i, t))
     else:
         f = False
-        output.write('Синтаксическая ошибка в строке 0: некорректный оператор')
+        output.write('Синтаксическая ошибка в строке 0: некорректный оператор\n')
     if f:
         op = l[0]
         if op == 'Чертежник':
@@ -228,7 +227,7 @@ def compiling_txt(file_name):
         if isinstance(op, Turtle) or isinstance(op, Blueprinter):
             canvas.pack()
             main.mainloop()
-    print('Программа успешно выполнена', file=output)
+    print('Программа успешно завершена\n', file=output)
     output.close()
 
 
@@ -298,7 +297,6 @@ def core_alg(l, op, canvas):
                 op.down()
             elif 'нц' in t:
                 cycle = cycle_body(l, i)
-                print(cycle)
                 for j in range(int(function_argument(l[i]))):
                     core_alg(cycle[1:], op, canvas)
                 i = int(cycle[0]) - 2
