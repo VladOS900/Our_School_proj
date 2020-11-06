@@ -7,7 +7,6 @@ import os
 
 # Текст и статичные файлы
 s = os.path.abspath('')
-os.chdir(s)
 
 count = 1
 style_textEdit = "background-color: rgb(255, 163, 71); color: rgb(0, 0, 0); border: 7px solid rgb(74, 35, 10)"
@@ -287,7 +286,7 @@ class Ui_MainWindow(QWidget):
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1062, 27))
         self.menubar.setStyleSheet(style_menu)
         font = QtGui.QFont()
-        font.setFamily("Times New Roman")
+        font.setFamily("Arial Black")
         font.setBold(False)
         font.setItalic(True)
         font.setWeight(50)
@@ -465,7 +464,7 @@ class Ui_MainWindow(QWidget):
                     text = file.read()
                     self.textEdit.setText(text)
                 except:
-                    self.textEdit.setText("Ага! баловаться решил и всякую бяку открывать вместо кода?) Не получится")
+                    self.textEdit.setText("Неозможно открыть данный файл так как он не является текстовым")
         except:
             pass
 
