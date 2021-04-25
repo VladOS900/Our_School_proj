@@ -17,20 +17,24 @@ class Failik:
         self.command_list = ['переименовать', 'создать_папку', 'создать_файл', 'удалить_папку', 'удалить_файл',
                              'перейти_в_папку', 'записать_файл']
         self.user_name = getpass.getuser()
-        if os.name == 'posix':
-            homedir = os.path.expanduser("~")
-            os.chdir('{}/Desktop'.format((homedir)))
-        elif os.name == 'nt':
-            homedir = os.path.expanduser("~")
-            try:
-                os.chdir(homedir + '\\Рабочий стол')
-            except:
-                try:
-                    os.chdir(homedir + '\\Desktop')
-                except:
+        s = os.getcwd()
+        os.chdir(s)
 
-                    os.chdir('C:\\Users\\vlgan\\PS Codes')
-                    print('Не удалось найти рабочий стол, результат сохранен в папку: C:\\Users\\vlgan\\PS Codes')
+    #        if os.name == 'posix':
+    #            homedir = os.path.expanduser("~")
+    #            os.chdir('{}/Desktop'.format((homedir)))
+    #        elif os.name == 'nt':
+    #            homedir = os.path.expanduser("~")
+    #            try:
+    #                os.chdir(homedir + '\\Рабочий стол')
+    #            except:
+    #                try:
+    #                    os.chdir(homedir + '\\Desktop')
+    #                except:
+    #                   pass
+
+    #                    os.chdir('C:\\Users\\vlgan\\PS Codes')
+    #                    print('Не удалось найти рабочий стол, результат сохранен в папку: C:\\Users\\vlgan\\PS Codes')
 
     def rename(self, old_name, new_name):
         try:
